@@ -77,7 +77,7 @@ class BotWindow(Gtk.ApplicationWindow):
 						# stop event propagation
 						return True
 		# focus game
-		if self.bot_thread and self.bot_thread.isAlive():
+		if self.bot_thread and self.bot_thread.is_alive():
 			self.focus_game()
 
 	def on_minimize(self, widget, event):
@@ -953,7 +953,7 @@ class BotWindow(Gtk.ApplicationWindow):
 			# ensure that game window is in the right place
 			self.move_resize_game_window(self.game_window_location)
 			# start bot thread
-			if self.bot_thread is None or not self.bot_thread.isAlive():
+			if self.bot_thread is None or not self.bot_thread.is_alive():
 				# get thread parameters
 				start_from_step = self.step_spin_button.get_value_as_int()
 				repeat_path = self.repeat_spin_button.get_value_as_int() if self.repeat_switch.get_active() else 1
@@ -995,7 +995,7 @@ class BotWindow(Gtk.ApplicationWindow):
 		self.pause_button.set_sensitive(False)
 
 	def pause_bot(self):
-		if self.bot_thread and self.bot_thread.isAlive() and self.bot_thread.pause_event.isSet():
+		if self.bot_thread and self.bot_thread.is_alive() and self.bot_thread.pause_event.isSet():
 			self.bot_thread.pause()
 
 	def on_pause_button_clicked(self, button):
@@ -1011,7 +1011,7 @@ class BotWindow(Gtk.ApplicationWindow):
 		self.bot_config_widgets.set_sensitive(True)
 
 	def on_stop_button_clicked(self, button):
-		if self.bot_thread and self.bot_thread.isAlive():
+		if self.bot_thread and self.bot_thread.is_alive():
 			self.bot_thread.stop()
 			self.reset_buttons()
 
@@ -1115,7 +1115,7 @@ class BotWindow(Gtk.ApplicationWindow):
 		# We only terminate when the user presses the OK button
 		if response == Gtk.ResponseType.OK:
 			# stop bot thread
-			if self.bot_thread and self.bot_thread.isAlive():
+			if self.bot_thread and self.bot_thread.is_alive():
 				self.bot_thread.stop()
 			return False
 
