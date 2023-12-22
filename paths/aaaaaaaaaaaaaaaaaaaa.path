@@ -1,0 +1,7 @@
+Move(UP)
+Move(UP)
+Move(UP)
+Move(RIGHT)
+Move(DOWN)
+Move(DOWN)
+Collect(map=[5,-22],store_path=paths/store/from_[7,-23]_to_bank_astrub.path)
