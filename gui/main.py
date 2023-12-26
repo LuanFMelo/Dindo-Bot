@@ -3,7 +3,7 @@
 
 import os
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf, GObject
 from lib import tools, logger, data, parser, settings, accounts, maps
 from threads.bot import BotThread

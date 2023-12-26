@@ -3,7 +3,7 @@
 
 import time
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import GObject
 from lib.shared import LogType, DebugLevel
 from lib import data, tools, imgcompare, accounts

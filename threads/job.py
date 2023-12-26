@@ -2,7 +2,7 @@
 # Copyright (c) 2018 - 2019 AXeL
 
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import GObject
 from gui.custom import MiniMap
 from lib.shared import LogType, DebugLevel, GameVersion

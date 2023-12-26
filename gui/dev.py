@@ -2,7 +2,7 @@
 # Copyright (c) 2018 - 2019 AXeL
 
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from lib import tools, data, convert
 from .custom import CustomTreeView, CustomComboBox, MenuButton, SpinButton, ButtonBox

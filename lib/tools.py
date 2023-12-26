@@ -4,9 +4,9 @@
 import sys
 import os
 import gi
-gi.require_version('Gtk', '3.0')
-gi.require_version('Wnck', '3.0')
-from gi.repository import Gtk, Gdk, GdkX11, Wnck
+gi.require_version('Gtk', '4.0')
+# gi.require_version('Wnck', '3.0')
+from gi.repository import Gtk, Gdk, GdkX11
 from datetime import datetime
 from Xlib import display, X, Xatom
 from PIL import Image
@@ -24,7 +24,7 @@ NET_FRAME_EXTENTS = disp.intern_atom('_NET_FRAME_EXTENTS')
 # Return active game window(s) list
 def get_game_window_list():
 	game_window_list = {}
-	screen = Wnck.Screen.get_default()
+	screen = Gdk.gdk_display_get_default()
 	screen.force_update() # recommended per Wnck documentation
 	window_list = screen.get_windows()
 	for window in window_list:
@@ -47,10 +47,10 @@ def get_screen_size():
 
 # Activate a window
 def activate_window(window):
-	screen = Wnck.Screen.get_default()
+	screen = Gdk.gdk_display_get_default()
 	screen.force_update()
-	wnckwin = [win for win in screen.get_windows() if win.get_xid() == window.get_xid()][0]
-	wnckwin.activate(GdkX11.x11_get_server_time(window))
+	gdkwin = [win for win in screen.get_windows() if win.get_xid() == window.get_xid()][0]
+	gdkwin.activate(GdkX11.x11_get_server_time(window))
 
 # Return game window
 def get_game_window(window_xid):

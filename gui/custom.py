@@ -2,7 +2,7 @@
 # Copyright (c) 2018 - 2019 AXeL
 
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gdk, Pango
 from lib.tools import fit_position_to_destination
 from lib.parser import parse_color
@@ -457,10 +457,10 @@ class MenuButton(Gtk.Button):
 	def add(self, widget):
 		self.popover.add(widget)
 
-class MenuImage(Gtk.EventBox):
+class MenuImage(Gtk.Box):
 
 	def __init__(self, icon_name='pan-down-symbolic', pixel_size=13, position=Gtk.PositionType.BOTTOM, padding=2):
-		Gtk.EventBox.__init__(self)
+		Gtk.Box.__init__(self)
 		self.add(Gtk.Image(icon_name=icon_name, pixel_size=pixel_size))
 		self.connect('button-press-event', self.on_button_press)
 		self.connect('enter-notify-event', self.on_enter_notify)
@@ -478,16 +478,26 @@ class MenuImage(Gtk.EventBox):
 	def set_widget(self, widget):
 		self.popover.add(widget)
 
-class FileChooserButton(Gtk.FileChooserButton):
+class FileChooserButton(Gtk.Button):
+    def __init__(self):
+        super().__init__(label="Choose File")
+        self.connect("clicked", self.on_file_chooser_button_clicked)
 
-	def __init__(self, title, filter=None):
-		Gtk.FileChooserButton.__init__(self, title=title)
-		if filter is not None and len(filter) > 1:
-			name, pattern = filter
-			file_filter = Gtk.FileFilter()
-			file_filter.set_name('%s (%s)' % (name, pattern))
-			file_filter.add_pattern(pattern)
-			self.add_filter(file_filter)
+    def on_file_chooser_button_clicked(self, widget):
+        dialog = Gtk.FileChooserDialog(
+            "Please choose a file", None,
+            Gtk.FileChooserAction.OPEN,
+            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+             Gtk.STOCK_OPEN, Gtk.ResponseType.OK)
+        )
+
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            print("File selected: " + dialog.get_filename())
+        elif response == Gtk.ResponseType.CANCEL:
+            print("File selection canceled")
+
+        dialog.destroy()
 
 class MiniMap(Gtk.Frame):
 
